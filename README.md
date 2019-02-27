@@ -1,6 +1,5 @@
 # quiz2019
-
-![language php](https://raw.githubusercontent.com/fxpar/quiz2019/master/badge_language-php-blue.svg)
+<img src="https://img.shields.io/badge/language-php-blue.svg" alt="language php"></a>
 
 ## This is not working yet
 
