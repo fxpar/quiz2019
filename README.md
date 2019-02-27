@@ -1,5 +1,5 @@
 # quiz2019
-##This project is not really working yet!
+## This is not working yet
 
 
 This is an experimentation on __material design__ applied to quiz creation in __PHP__.  
