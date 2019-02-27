@@ -1,5 +1,6 @@
 # quiz2019
 <img src="https://img.shields.io/badge/language-php-blue.svg" alt="language php"></a> 
+![database mysql](https://img.shields.io/badge/database-mysql-9cf.svg) 
 ![Initial Stage](https://img.shields.io/badge/development%20stage-initial-red.svg)
 
 ## This is not working yet
