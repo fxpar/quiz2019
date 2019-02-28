@@ -76,14 +76,22 @@ mysqli_close($con);
 			var qid;
 			var scores = new Array();
 			function setQuestion(){
+				
+				document.querySelector('#progressbar1').MaterialProgress.setProgress(70);
+
+		 
 				if ( answers !== 'undefined'){
 				 answers = <?php echo json_encode($row); ?>;
 				 scores = <?php echo json_encode($user[2]); ?>; // change user index to get scores
 				}
-				var max = answers.length +1;
-				qid = Math.random() * (max - 1) + 1;
+				var max = answers.length ;
+				qid = Math.random() * max ;
 				qid = Math.trunc(qid);
 				
+				document.getElementById("correct").textContent = '';
+				document.getElementById("correct").style.display = 'none';
+				document.getElementById("uncorrect").textContent = '';
+				document.getElementById("uncorrect").style.display = 'none';
 				document.getElementById("username").textContent = '<?php echo($user[1]); ?>';
 				document.getElementById("question").textContent = answers[qid][2];
 				document.getElementById("answerLabel").textContent = answers[qid][3];
@@ -100,19 +108,26 @@ mysqli_close($con);
 					
 					var quizAnswer = answers[qid][4];
 						if (userAnswer == quizAnswer) {
-							alert ("perfect!\n" + quizAnswer + " = " + userAnswer);
-							document.getElementById("success").setAttribute("value", "1");
+							//alert ("perfect!\n" + quizAnswer + " = " + userAnswer);
+							document.getElementById("correct").textContent = answers[qid][4];
+							document.getElementById("correct").style.display = 'block';
+							
 							scores[qid]= scores[qid] +1;
 						}else {
-							alert ("sorry!\n" + quizAnswer + " < > " + userAnswer);
-							document.getElementById("success").setAttribute("value", "0");
+							//alert ("sorry!\n" + quizAnswer + " < > " + userAnswer);
+							document.getElementById("uncorrect").textContent = answers[qid][4];
+							document.getElementById("uncorrect").style.display = 'block';
+							
+							//document.getElementById("success").setAttribute("value", "0");
 							scores[qid]= scores[qid] -1;
 						}
 					checked = true;
 					qid++;
 					} 
+					setTimeout(function(){
+    setQuestion();
+}, 2000);
 					
-					setQuestion();
 					
 					return true;
 					
@@ -158,16 +173,23 @@ mysqli_close($con);
 
 						<!--<h1>Quiz</h1>-->
 						<div class="demo-card-square mdl-card mdl-shadow--2dp">
+
+						<div id = "progressbar1" class = "mdl-progress mdl-js-progress"></div>
+						
 							<div id="username" class="mdl-card__supporting-text" style="text-align:right">
 								username
 							</div>
 							<div class="mdl-card--expand" >
+							<h5  id="correct" style="text-align:center; display:none; color:green">correct</h2>
+								<h5  id="uncorrect" style="text-align:center; display:none; color:red">uncorrect</h2>
+								
 								<h2  id="question" style="text-align:center"><?php echo($row[$qid][2]); ?></h2>
 							</div>
 
 							<div class="mdl-card__actions mdl-card--border">
 
 								<form method="get" onsubmit="return checkInput();" action="#">
+								
 									<!-- HIDDEN FIELDS -->
 									<input id="userId" name="userId" style="display:none" class="mdl-textfield__input " type="text"  value="1">
 									
