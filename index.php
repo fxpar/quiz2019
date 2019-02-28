@@ -74,10 +74,11 @@ mysqli_close($con);
 			var checked = false;
 			var answers;
 			var qid;
+			var scores = new Array();
 			function setQuestion(){
 				if ( answers !== 'undefined'){
 				 answers = <?php echo json_encode($row); ?>;
-				//var scores = <?php echo json_encode($user[2]); ?>; // change user index to get scores
+				 scores = <?php echo json_encode($user[2]); ?>; // change user index to get scores
 				}
 				var max = answers.length +1;
 				qid = Math.random() * (max - 1) + 1;
@@ -87,6 +88,9 @@ mysqli_close($con);
 				document.getElementById("question").textContent = answers[qid][2];
 				document.getElementById("answerLabel").textContent = answers[qid][3];
 				document.getElementById("uanswer").value = "";
+				//if (scores[qid]='undefined') {
+					scores[qid]=0;
+				//	}
 				checked = false;
 			}
 				function checkInput() {
@@ -98,9 +102,11 @@ mysqli_close($con);
 						if (userAnswer == quizAnswer) {
 							alert ("perfect!\n" + quizAnswer + " = " + userAnswer);
 							document.getElementById("success").setAttribute("value", "1");
+							scores[qid]= scores[qid] +1;
 						}else {
 							alert ("sorry!\n" + quizAnswer + " < > " + userAnswer);
 							document.getElementById("success").setAttribute("value", "0");
+							scores[qid]= scores[qid] -1;
 						}
 					checked = true;
 					qid++;
@@ -121,6 +127,21 @@ mysqli_close($con);
 						return true;
 					}
 				}
+				
+				function saveScores(){
+					var xhr = new XMLHttpRequest();
+						xhr.open('POST', 'scores.php', true);
+						xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+						xhr.onload = function () {
+							// do something to response
+							console.log(this.responseText);
+						};
+						
+						xhr.send('id=1&scores=' + JSON.stringify(scores)); 
+					
+				}
+				
+				
 			</script>
 		</head>
 		<body onload="setQuestion();">
