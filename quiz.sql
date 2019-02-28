@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 27 Février 2019 à 21:09
+-- Généré le :  Jeu 28 Février 2019 à 16:26
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -53,7 +53,12 @@ INSERT INTO `answers` (`id`, `user`, `question`, `answer`, `timestamp`, `success
 (11, 1, 2, 'man', '2019-02-27 19:02:47', 0),
 (12, 1, 3, '', '2019-02-27 19:02:51', 0),
 (13, 1, 4, 'nan2 ren2', '2019-02-27 19:03:08', 1),
-(14, 1, 1, 'nan2 ren2', '2019-02-27 19:51:38', 1);
+(14, 1, 1, 'nan2 ren2', '2019-02-27 19:51:38', 1),
+(15, 1, 5, 'nv3 ren2', '2019-02-27 22:23:39', 1),
+(16, 1, 6, 'woman ', '2019-02-27 22:24:49', 0),
+(17, 1, 7, 'nv3 ren2', '2019-02-27 22:25:06', 0),
+(18, 1, 8, 'nv3 ren2', '2019-02-27 22:25:34', 1),
+(19, 1, 9, 'nan2 hai2', '2019-02-27 22:26:06', 1);
 
 -- --------------------------------------------------------
 
@@ -206,15 +211,16 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `registrationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `registrationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `scores` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Contenu de la table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `password`, `registrationDate`) VALUES
-(1, 'firstUser', 'firstPassword', '2019-02-26 23:00:00');
+INSERT INTO `user` (`id`, `name`, `password`, `registrationDate`, `scores`) VALUES
+(1, 'fxp', 'password', '2019-02-26 23:00:00', '"[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,1,null,null,0,null,null,-1,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-1,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,1]"');
 
 --
 -- Index pour les tables exportées
@@ -253,7 +259,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT pour la table `chineseskills`
 --
