@@ -69,11 +69,20 @@ mysqli_close($con);
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>bonjour</title>
 		<link rel="stylesheet" href="./res/material.min.css">
+		<style>
+@font-face {
+	font-family: "Material Icons";
+	src: url('./res/MaterialIcons-Regular.ttf');
+}
+				
+
+</style>
 			<script src="./res/material.min.js"></script>
 			<script type="text/javascript"> 
 			var checked = false;
 			var answers;
 			var qid;
+			var status;
 			var scores = new Array();
 			function setQuestion(){
 				
@@ -111,23 +120,28 @@ mysqli_close($con);
 							//alert ("perfect!\n" + quizAnswer + " = " + userAnswer);
 							document.getElementById("correct").textContent = answers[qid][4];
 							document.getElementById("correct").style.display = 'block';
-							
 							scores[qid]= scores[qid] +1;
+							status="correct";
 						}else {
 							//alert ("sorry!\n" + quizAnswer + " < > " + userAnswer);
 							document.getElementById("uncorrect").textContent = answers[qid][4];
 							document.getElementById("uncorrect").style.display = 'block';
-							
 							//document.getElementById("success").setAttribute("value", "0");
 							scores[qid]= scores[qid] -1;
+							status="uncorrect";
 						}
 					checked = true;
 					qid++;
 					} 
-					setTimeout(function(){
-    setQuestion();
-}, 2000);
-					
+					if (status == "correct") {
+						setTimeout(function(){
+							setQuestion();
+						}, 2000);
+					}else{
+						setTimeout(function(){
+							setQuestion();
+						}, 4000);
+					}
 					
 					return true;
 					
@@ -163,14 +177,14 @@ mysqli_close($con);
 
 			
 
-			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header ">
 <?php require_once('header.html'); ?>
 
 				<div class="mdl-grid" >
 
 					<div class="mdl-cell mdl-cell--4-col">
 						<!--centrage-->
-
+<div class="mdl-layout-spacer"></div>
 						<!--<h1>Quiz</h1>-->
 						<div class="demo-card-square mdl-card mdl-shadow--2dp">
 
@@ -209,7 +223,7 @@ mysqli_close($con);
 									
 									
 									<button  type="button" onclick="checkInput();" value="Submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"  >
-  <i class="material-icons">→</i>
+  <i class="material-icons">keyboard_arrow_right</i>
   </button>								
 
 
@@ -218,18 +232,19 @@ mysqli_close($con);
 			  View Updates
 			</a>-->
 							</div>
-						</div>
+						</div><!-- end card -->
 
 
 
 					</div>
 
 					<div class="mdl-layout-spacer"></div>
-				</div>
-				<!-- end grid above -->
+				</div> <!-- end grid -->
+				
 
-
-			</div>
-			<!-- end layout above -->
+ <!--</main>
+</div>  end page-content -->
+			</div> <!-- end layout -->
+			
 		</body>
 	</html>
